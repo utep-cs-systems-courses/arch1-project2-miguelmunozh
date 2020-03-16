@@ -40,10 +40,12 @@ void led_update(){
       //buzzer_set_period(0);
     }
     if(switch_state_down3){
+      buzzer_set_period(3000);
     ledFlags |= switch_state_down3 ? LED_GREEN : 0;
     ledFlags |= switch_state_down3 ? 0 : LED_RED;
     }
     if(switch_state_down4){
+      buzzer_set_period(4000);
     ledFlags |= switch_state_down4 ? LED_RED : 0;
     ledFlags |= switch_state_down4 ? 0 : LED_GREEN;
     }

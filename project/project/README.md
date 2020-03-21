@@ -1,31 +1,20 @@
-## Description
-This interrupt-driven program flashes the LEDs in a silly pattern.
+## Blinky-Buzzy Toy
+For this lab I used the MSP430 microcontroller and my creativity to dessign
+the toy.
 
-## Exploration
+This toy can:
+* generate sounds
+* dinamically change the LEDs that are illuminated
+* implement state machine
 
-_Write some some code in Assembly Language_
-
-Translate led.c to led_s.s, and modify the Makefile to reference it.  Remember
-
-* to put global and static vars in the data segment and instructions in the
-text segment using the .data and .text directives,
-* to make global symbols visible to other modules using .global, and
-* to import external symbols from other modules with .extern
-
-_Changing speed:_ Figure out how to flash the lights faster or slower.  Determine if there's a speed where the lights don't appear to flash... but glow instead!
-
-_Counting to three:_  Change the program to slowly and repeatedly
-count from zero to three, displaying the value in binary using the red
-& green lights. This is simpler than the program we provided.
-
-## Some Advice
-When creating your own variants to the demo programs,
-it's probably a good idea to keep a copy of the original program (or really understand how _git checkout_ works).  
-
-
-
-
-
-
-
-
+## Explanation
+Once you use the command _make load you can use the four top buttons of the
+MSP430
+_In button one: you can listen a song in the MSP430
+_In button two: you can see the LEDs turning on and off to count in binary
+from 0 to 3 (eg. 00,01,10,11) the ones represent the light on red,green as in
+my MSP430
+_In button three: you can listen a different song but this time the LEDs turn
+on and off at the rithm of the music
+_In button four: you can see the LEDs turning off and off with certain pattern
+like in blink_demo.

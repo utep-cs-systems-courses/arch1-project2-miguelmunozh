@@ -3,5 +3,6 @@
 char state;
 void state_advance();
 void state_advance_binary();
-void piano();
+void state_advance_song();
+
 #endif // included

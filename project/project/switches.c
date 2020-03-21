@@ -5,7 +5,7 @@
 
 //#include "buzzer.h"
 char switch_state_down,switch_state_down2,switch_state_down3, switch_state_down4, switch_state_changed; /* effectively boolean */
-char state = 1;
+char state = 0;
 static char 
 switch_update_interrupt_sense()
 {
@@ -79,12 +79,17 @@ switch_interrupt_handler()
   
   switch_state_changed = 1;
   //  led_update();
-  /*   if(switch_state_down){
+  if(switch_state_down){
     state = 1;
   }
   if(switch_state_down2){
     state = 2;
-    }*/
-  
+  }
+  if(switch_state_down3){
+    state = 3;
+  }
+  if(switch_state_down4){
+    state = 4;
+  }  
 }
 

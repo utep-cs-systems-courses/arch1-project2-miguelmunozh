@@ -2,6 +2,7 @@
 #include "stateMachines.h"
 #include "switches.h"
 #include "buzzer.h"
+//#include "toggle.h"
 
 void
 __interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
@@ -20,6 +21,7 @@ __interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
      }
     if(state== 2){
       if (++another_count ==250) {
+	buzzer_set_period(0);
 	state_advance_binary();
 	  another_count = 0;
 	}
@@ -32,6 +34,7 @@ __interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
     }
     if(state == 4){
       if(++blink_count == 40){
+	buzzer_set_period(0); //stop the beep
         state_advance();
         blink_count = 0;
       }      

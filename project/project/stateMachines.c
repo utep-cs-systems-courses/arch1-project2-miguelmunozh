@@ -2,8 +2,9 @@
 #include "stateMachines.h"
 #include "led.h"
 #include "buzzer.h"
+#include "toggle.h"
 
-char toggle_red()		/* always toggle! */
+char toggle_red()		// always toggle! 
 {
   static char state = 0;
 
@@ -17,11 +18,11 @@ char toggle_red()		/* always toggle! */
     state = 0;
     break;
   }
-  return 1;			/* always changes an led */
+  return 1;		        //always changes an led/
 }
 
 
-char toggle_green()	/* only toggle green if red is on!  */
+char toggle_green()	//only toggle green if red is on!  
 {
   char changed = 0;
   if (red_on) {
@@ -30,7 +31,6 @@ char toggle_green()	/* only toggle green if red is on!  */
   }
   return changed;
 }
-
 
 void state_advance()		/* alternate between toggling red & green */
 {
@@ -50,7 +50,7 @@ void state_advance()		/* alternate between toggling red & green */
 /*binary state machine that counts to 3,
  this state machine goes through 4 stages
  which are cases 0 - 3*/
-char toggle(){
+/*char toggle(){
   static char state =0;
   switch(state){
   case 0:
@@ -77,14 +77,15 @@ char toggle(){
 return 1;
 
 }
-
+*/
 /*toggle_song turns off and on the leds at the rythim of the ''music''*/
 char toggle_rithm(){
- static char state =0;
+  static char state =0;
   switch(state){
   case 0:
     //change leds
-    red_on = 1;
+    //red_on = 1;
+    toggle_red();
     green_on =0;
     //play a tone
     buzzer_set_period(1000);
@@ -250,6 +251,8 @@ return 1;
   
 }
 void state_advance_song(){
+  green_on = 0;
+  red_on = 0;
  static char stat =0;
   switch(stat){
   case 0:

@@ -47,40 +47,14 @@ void state_advance()		/* alternate between toggling red & green */
 }
 
 
-/*binary state machine that counts to 3,
- this state machine goes through 4 stages
- which are cases 0 - 3*/
-/*char toggle(){
-  static char state =0;
-  switch(state){
-  case 0:
-    red_on = 0;
-    green_on =0;
-    state =1;
-    break;
-  case 1:
-      green_on = 1;
-      state = 2;
-      break;
-  case 2:
-    red_on = 1;
-    //red_on=toggle_red();
-    green_on=0;
-    state =3;
-    break;
-  case 3:
-    red_on =1;
-    green_on =1;
-    state =0;
-    break;
-  }
-return 1;
-
-}
-*/
 /*toggle_song turns off and on the leds at the rythim of the ''music''*/
+
 char toggle_rithm(){
   static char state =0;
+  //make sure the leds are off
+  green_on = 0;
+  red_on = 0;
+  
   switch(state){
   case 0:
     //change leds
@@ -250,11 +224,17 @@ char toggle_rithm(){
 return 1;
   
 }
+
+/* this state machines displays a song*/
+
 void state_advance_song(){
+  //make sure the leds are off
   green_on = 0;
   red_on = 0;
+  
  static char stat =0;
-  switch(stat){
+
+ switch(stat){
   case 0:
     buzzer_set_period(440);
     stat =1;
@@ -528,10 +508,15 @@ case 49:
   }
 }
 
+/*this are helper functions to call functions in wdInterruptHandler.c
+ when buttons are pressed*/
+
+/*calls toggle function from toggle.h (toggleAssembly.s)*/
 void state_advance_binary(){
   led_changed = toggle();
   led_update();
 }
+/*calls toggle rithm*/
 void state_advance_rithm(){
   led_changed = toggle_rithm();
   led_update();

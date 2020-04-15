@@ -2,16 +2,17 @@
 #include "stateMachines.h"
 #include "switches.h"
 #include "buzzer.h"
-//#include "toggle.h"
 
 void
 __interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
   static char blink_count = 0;
   static char another_count =0;
-    //switch_interrupt_handler();
-    //or set the song in btn6 or 7
-  switch_interrupt_handler();
     
+  switch_interrupt_handler();
+
+  /*checks for the value of state, when a button is pressed 
+    the value of state is changed, so if button 1 is pressed 
+    the state value is 1*/
   if(state == 1){
       if(++blink_count == 50){
         state_advance_song();
@@ -27,7 +28,7 @@ __interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
 	}
       }
     if(state == 3){
-      if(++blink_count == 30){
+      if(++blink_count == 40){
         state_advance_rithm();
         blink_count = 0;
       }      

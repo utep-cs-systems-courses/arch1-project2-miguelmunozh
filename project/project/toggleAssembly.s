@@ -1,10 +1,12 @@
 	.arch msp430g2553
 
-	.data
-state:				;state
+/*assembly for binary count 0-3 */
+	
+	.data			;in ram memory
+state:				;state variable
 	.word 0
 
-	.text
+	.text			;in read only memory for execution
 jt:				;jump table
 	.word case0
 	.word case1
@@ -16,53 +18,54 @@ jt:				;jump table
 	.global toggle
 
 toggle:
-	cmp #8, &state 		;range check
-	mov &state, r12		;moves state into r12
-	add r12, r12		;add r12 into r12 
-	mov jt(r12), r0		;start at first in jt
-
+/*	cmp.b &state, #4	;if(state > 4)
+	JHS case1		*/
+	
+	mov.b &state, r12	;moves state into r12
+	add.b r12, r12		;r12 =  2 * state
+	mov jt(r12), r0		;jmp jt[s], r0 is the program counter
+	
 case0:
-
-/*	mov.b #0, &green_on		
-	mov.b #0, &red_on*/
-	mov #1, &state			;set state to 1 to go to case1
+	mov.b #1, &state		;set state to 1 to go to case1
 	jmp end
 
 case1:
-	mov.b #0, &green_on		;set green led to be off
-	mov.b #0, &red_on		;set red led to be off
-	mov #2, &state			;set state to 2 so that it moves to case2
-	jmp end
+	mov.b #0, &green_on	;set green led to be off
+	mov.b #0, &red_on	;set red led to be off
+	mov.b #2, &state		;set state to 2 so that it moves to case2
+	jmp end			;return
 
 case2:
 	mov.b #1, &green_on
 	mov.b #0, &red_on
-	mov #3, &state
+	mov.b #3, &state
 	jmp end
 
 case3:
 	mov.b #0, &green_on
 	mov.b #1, &red_on
-	mov #4, &state
+	mov.b #4, &state
 	jmp end
 
 case4:	
 	mov.b #1, &green_on
 	mov.b #1, &red_on
-	mov #1, &state
+	mov.b #1, &state
 	jmp end
 
 
 
-end:	 ret		
-/*
-case_zero:
+end:	pop r0			;return
+
+
+	/*
+case1:
 
 	mov.b #0, &red_on
 	mov.b #1, &green_on
 	jmp case1
 	
-case_one:
+case0:
 	mov.b #1, &red_on
 	mov.b #0, &green_on
 	jmp case0
